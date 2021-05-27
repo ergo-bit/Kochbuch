@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EinkaufslisteDialog</class>
+ <widget class="QDialog" name="EinkaufslisteDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>511</width>
+    <height>763</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Einkaufsliste</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog
+{
+background-color: rgb(180, 180, 175)
+}
+</string>
+  </property>
+  <widget class="QLabel" name="lblTitel">
+   <property name="geometry">
+    <rect>
+     <x>175</x>
+     <y>15</y>
+     <width>161</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>25</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Einkaufsliste</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnHinzufuegen">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>715</y>
+     <width>191</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton
+{
+border: 1px solid grey;
+border-radius: 5px;
+text-align: center;
+background-color: rgb(80, 190, 160);
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Dokument erstellen</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnHinzufuegen_2">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>715</y>
+     <width>141</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton
+{
+border: 1px solid grey;
+border-radius: 5px;
+text-align: center;
+background-color: rgb(230, 130, 150);
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Liste leeren</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnAbbrechen_2">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>715</y>
+     <width>141</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton
+{
+border: 1px solid grey;
+border-radius: 5px;
+text-align: center;
+background-color: lightgray;
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Abbrechen</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="textEdit">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>85</y>
+     <width>471</width>
+     <height>621</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

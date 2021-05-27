@@ -44,36 +44,22 @@ border-top-right-radius: 0px;
 border-bottom-right-radius: 0px;
 text-align: center;
 }
-
-QProgressBar 
-{
-border: 2px solid grey;
-border-radius: 5px;
-text-align: center;
-}
-
-QProgressBar::chunk
-{
-background-color: lightgreen;
-width: 10px;
-margin: 1px;
-}
 </string>
     </property>
    </widget>
    <widget class="QLabel" name="lblKochbuch">
     <property name="geometry">
      <rect>
-      <x>285</x>
+      <x>280</x>
       <y>30</y>
-      <width>316</width>
+      <width>326</width>
       <height>61</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Blackadder ITC</family>
-      <pointsize>32</pointsize>
+      <pointsize>34</pointsize>
      </font>
     </property>
     <property name="text">
@@ -102,20 +88,6 @@ border: 1px solid grey;
 border-radius: 5px;
 text-align: center;
 background-color: rgb(190, 150, 210);
-}
-
-QProgressBar 
-{
-border: 2px solid grey;
-border-radius: 5px;
-text-align: center;
-}
-
-QProgressBar::chunk
-{
-background-color: lightgreen;
-width: 10px;
-margin: 1px;
 }
 </string>
     </property>
@@ -146,20 +118,6 @@ border-radius: 5px;
 text-align: center;
 background-color: rgb(80, 190, 160);
 }
-
-QProgressBar 
-{
-border: 2px solid grey;
-border-radius: 5px;
-text-align: center;
-}
-
-QProgressBar::chunk
-{
-background-color: lightgreen;
-width: 10px;
-margin: 1px;
-}
 </string>
     </property>
     <property name="text">
@@ -188,20 +146,6 @@ border: 1px solid grey;
 border-radius: 5px;
 text-align: center;
 background-color: rgb(100, 170, 210);
-}
-
-QProgressBar 
-{
-border: 2px solid grey;
-border-radius: 5px;
-text-align: center;
-}
-
-QProgressBar::chunk
-{
-background-color: lightgreen;
-width: 10px;
-margin: 1px;
 }
 </string>
     </property>
@@ -232,20 +176,6 @@ border-radius: 5px;
 text-align: center;
 background-color: rgb(230, 130, 150);
 }
-
-QProgressBar 
-{
-border: 2px solid grey;
-border-radius: 5px;
-text-align: center;
-}
-
-QProgressBar::chunk
-{
-background-color: lightgreen;
-width: 10px;
-margin: 1px;
-}
 </string>
     </property>
     <property name="text">
@@ -275,20 +205,6 @@ border-radius: 5px;
 text-align: center;
 background-color: rgb(255, 240, 160);
 }
-
-QProgressBar 
-{
-border: 2px solid grey;
-border-radius: 5px;
-text-align: center;
-}
-
-QProgressBar::chunk
-{
-background-color: lightgreen;
-width: 10px;
-margin: 1px;
-}
 </string>
     </property>
     <property name="text">
@@ -317,20 +233,6 @@ border: 1px solid grey;
 border-radius: 5px;
 text-align: center;
 background-color: rgb(240, 200, 160);
-}
-
-QProgressBar 
-{
-border: 2px solid grey;
-border-radius: 5px;
-text-align: center;
-}
-
-QProgressBar::chunk
-{
-background-color: lightgreen;
-width: 10px;
-margin: 1px;
 }
 </string>
     </property>
@@ -362,20 +264,6 @@ border-radius: 5px;
 text-align: center;
 background-color: lightgray;
 }
-
-QProgressBar 
-{
-border: 2px solid grey;
-border-radius: 5px;
-text-align: center;
-}
-
-QProgressBar::chunk
-{
-background-color: lightgreen;
-width: 10px;
-margin: 1px;
-}
 </string>
     </property>
     <property name="text">
@@ -405,20 +293,6 @@ border: 0px solid grey;
 border-radius: 5px;
 text-align: center;
 background-color: lightgray;
-}
-
-QProgressBar 
-{
-border: 2px solid grey;
-border-radius: 5px;
-text-align: center;
-}
-
-QProgressBar::chunk
-{
-background-color: lightgreen;
-width: 10px;
-margin: 1px;
 }
 </string>
     </property>
@@ -471,20 +345,6 @@ border-bottom-left-radius: 0px;
 text-align: center;
 background-color: lightgray;
 }
-
-QProgressBar 
-{
-border: 2px solid grey;
-border-radius: 5px;
-text-align: center;
-}
-
-QProgressBar::chunk
-{
-background-color: lightgreen;
-width: 10px;
-margin: 1px;
-}
 </string>
     </property>
     <property name="text">
@@ -523,7 +383,7 @@ margin: 1px;
    </widget>
    <widget class="QMenu" name="menuStammdaten">
     <property name="title">
-     <string>Stammdaten</string>
+     <string>&amp;Stammdaten</string>
     </property>
     <widget class="QMenu" name="menuGerichte">
      <property name="title">

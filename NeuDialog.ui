@@ -1,0 +1,1235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NeuDialog</class>
+ <widget class="QDialog" name="NeuDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>730</width>
+    <height>824</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Neues Gericht hinzufügen</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog
+{
+background-color: rgb(180, 180, 175)
+}
+</string>
+  </property>
+  <widget class="QPushButton" name="btnHinzufuegen">
+   <property name="geometry">
+    <rect>
+     <x>395</x>
+     <y>770</y>
+     <width>141</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton
+{
+border: 1px solid grey;
+border-radius: 5px;
+text-align: center;
+background-color: rgb(80, 190, 160);
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Hinzufügen</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnAbbrechen">
+   <property name="geometry">
+    <rect>
+     <x>555</x>
+     <y>770</y>
+     <width>141</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton
+{
+border: 1px solid grey;
+border-radius: 5px;
+text-align: center;
+background-color: lightgray;
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Abbrechen</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblGerichtName">
+   <property name="geometry">
+    <rect>
+     <x>65</x>
+     <y>75</y>
+     <width>176</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Name des Gerichtes:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTitel">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>15</y>
+     <width>211</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>25</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Ein neues Gericht</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblKategorie">
+   <property name="geometry">
+    <rect>
+     <x>65</x>
+     <y>115</y>
+     <width>176</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Kategorie:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblZutaten">
+   <property name="geometry">
+    <rect>
+     <x>65</x>
+     <y>160</y>
+     <width>176</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Zutaten:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBoxFruestueck">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>130</y>
+     <width>86</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Frühstück</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBoxMittag">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>130</y>
+     <width>86</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Mittag</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBoxAbendbrot">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>130</y>
+     <width>86</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Abendbrot</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBoxSnack">
+   <property name="geometry">
+    <rect>
+     <x>535</x>
+     <y>130</y>
+     <width>86</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Snack</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBoxNachtisch">
+   <property name="geometry">
+    <rect>
+     <x>625</x>
+     <y>130</y>
+     <width>86</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Nachtisch</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblAnleitung">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>530</y>
+     <width>231</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Anleitung für die Zubereitung:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblDauer">
+   <property name="geometry">
+    <rect>
+     <x>25</x>
+     <y>730</y>
+     <width>216</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Dauer der Zubereitung:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textGerichtName">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>85</y>
+     <width>441</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="textAnleitung">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>540</y>
+     <width>441</width>
+     <height>185</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textDauer">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>740</y>
+     <width>46</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblMinuten">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>740</y>
+     <width>76</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Minuten</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_1">
+   <property name="geometry">
+    <rect>
+     <x>325</x>
+     <y>195</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_1">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>195</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_1">
+   <property name="geometry">
+    <rect>
+     <x>295</x>
+     <y>195</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblSpaltenbezeichnung">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>170</y>
+     <width>206</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>7</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>[Menge] [Einheit]            [Komponente]</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_2">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>220</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_2">
+   <property name="geometry">
+    <rect>
+     <x>295</x>
+     <y>220</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_2">
+   <property name="geometry">
+    <rect>
+     <x>325</x>
+     <y>220</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_3">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>245</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_3">
+   <property name="geometry">
+    <rect>
+     <x>295</x>
+     <y>245</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_3">
+   <property name="geometry">
+    <rect>
+     <x>325</x>
+     <y>245</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_4">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>270</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_4">
+   <property name="geometry">
+    <rect>
+     <x>295</x>
+     <y>270</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_4">
+   <property name="geometry">
+    <rect>
+     <x>325</x>
+     <y>270</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_5">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>295</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_5">
+   <property name="geometry">
+    <rect>
+     <x>295</x>
+     <y>295</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_5">
+   <property name="geometry">
+    <rect>
+     <x>325</x>
+     <y>295</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_6">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>320</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_6">
+   <property name="geometry">
+    <rect>
+     <x>295</x>
+     <y>320</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_6">
+   <property name="geometry">
+    <rect>
+     <x>325</x>
+     <y>320</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_7">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>345</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_7">
+   <property name="geometry">
+    <rect>
+     <x>295</x>
+     <y>345</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_7">
+   <property name="geometry">
+    <rect>
+     <x>325</x>
+     <y>345</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_8">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>370</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_8">
+   <property name="geometry">
+    <rect>
+     <x>295</x>
+     <y>370</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_8">
+   <property name="geometry">
+    <rect>
+     <x>325</x>
+     <y>370</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_9">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>395</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_9">
+   <property name="geometry">
+    <rect>
+     <x>295</x>
+     <y>395</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_9">
+   <property name="geometry">
+    <rect>
+     <x>325</x>
+     <y>395</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_10">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>420</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_10">
+   <property name="geometry">
+    <rect>
+     <x>295</x>
+     <y>420</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_10">
+   <property name="geometry">
+    <rect>
+     <x>325</x>
+     <y>420</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_11">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>445</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_11">
+   <property name="geometry">
+    <rect>
+     <x>295</x>
+     <y>445</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_11">
+   <property name="geometry">
+    <rect>
+     <x>325</x>
+     <y>445</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_12">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>470</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_12">
+   <property name="geometry">
+    <rect>
+     <x>295</x>
+     <y>470</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_12">
+   <property name="geometry">
+    <rect>
+     <x>325</x>
+     <y>470</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_13">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>170</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_13">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>170</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_13">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>170</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_14">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>195</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_14">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>195</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_14">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>195</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_15">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>220</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_15">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>220</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_15">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>220</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblZutaten_2">
+   <property name="geometry">
+    <rect>
+     <x>65</x>
+     <y>495</y>
+     <width>176</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Personenanzahl:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textPersonen">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>505</y>
+     <width>46</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_16">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>245</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_16">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>245</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_16">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>245</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_17">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>270</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_17">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>270</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_17">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>270</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_18">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>295</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_18">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>295</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_18">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>295</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_19">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>320</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_19">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>320</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_19">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>320</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_20">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>345</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_20">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>345</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_20">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>345</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_21">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>370</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_21">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>370</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_21">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>370</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_22">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>395</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_22">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>395</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_22">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>395</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_23">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>420</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_23">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>420</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_23">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>420</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_24">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>445</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_24">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>445</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_24">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>445</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textMenge_25">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>470</y>
+     <width>36</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textKomponente_25">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>470</y>
+     <width>136</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="textEinheit_25">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>470</y>
+     <width>26</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>textGerichtName</tabstop>
+  <tabstop>checkBoxFruestueck</tabstop>
+  <tabstop>checkBoxMittag</tabstop>
+  <tabstop>checkBoxAbendbrot</tabstop>
+  <tabstop>checkBoxSnack</tabstop>
+  <tabstop>checkBoxNachtisch</tabstop>
+  <tabstop>textMenge_1</tabstop>
+  <tabstop>textEinheit_1</tabstop>
+  <tabstop>textKomponente_1</tabstop>
+  <tabstop>textMenge_2</tabstop>
+  <tabstop>textEinheit_2</tabstop>
+  <tabstop>textKomponente_2</tabstop>
+  <tabstop>textMenge_3</tabstop>
+  <tabstop>textEinheit_3</tabstop>
+  <tabstop>textKomponente_3</tabstop>
+  <tabstop>textMenge_4</tabstop>
+  <tabstop>textEinheit_4</tabstop>
+  <tabstop>textKomponente_4</tabstop>
+  <tabstop>textMenge_5</tabstop>
+  <tabstop>textEinheit_5</tabstop>
+  <tabstop>textKomponente_5</tabstop>
+  <tabstop>textMenge_6</tabstop>
+  <tabstop>textEinheit_6</tabstop>
+  <tabstop>textKomponente_6</tabstop>
+  <tabstop>textMenge_7</tabstop>
+  <tabstop>textEinheit_7</tabstop>
+  <tabstop>textKomponente_7</tabstop>
+  <tabstop>textMenge_8</tabstop>
+  <tabstop>textEinheit_8</tabstop>
+  <tabstop>textKomponente_8</tabstop>
+  <tabstop>textMenge_9</tabstop>
+  <tabstop>textEinheit_9</tabstop>
+  <tabstop>textKomponente_9</tabstop>
+  <tabstop>textMenge_10</tabstop>
+  <tabstop>textEinheit_10</tabstop>
+  <tabstop>textKomponente_10</tabstop>
+  <tabstop>textMenge_11</tabstop>
+  <tabstop>textEinheit_11</tabstop>
+  <tabstop>textKomponente_11</tabstop>
+  <tabstop>textMenge_12</tabstop>
+  <tabstop>textEinheit_12</tabstop>
+  <tabstop>textKomponente_12</tabstop>
+  <tabstop>textMenge_13</tabstop>
+  <tabstop>textEinheit_13</tabstop>
+  <tabstop>textKomponente_13</tabstop>
+  <tabstop>textMenge_14</tabstop>
+  <tabstop>textEinheit_14</tabstop>
+  <tabstop>textKomponente_14</tabstop>
+  <tabstop>textMenge_15</tabstop>
+  <tabstop>textEinheit_15</tabstop>
+  <tabstop>textKomponente_15</tabstop>
+  <tabstop>textMenge_16</tabstop>
+  <tabstop>textEinheit_16</tabstop>
+  <tabstop>textKomponente_16</tabstop>
+  <tabstop>textMenge_17</tabstop>
+  <tabstop>textEinheit_17</tabstop>
+  <tabstop>textKomponente_17</tabstop>
+  <tabstop>textMenge_18</tabstop>
+  <tabstop>textEinheit_18</tabstop>
+  <tabstop>textKomponente_18</tabstop>
+  <tabstop>textMenge_19</tabstop>
+  <tabstop>textEinheit_19</tabstop>
+  <tabstop>textKomponente_19</tabstop>
+  <tabstop>textMenge_20</tabstop>
+  <tabstop>textEinheit_20</tabstop>
+  <tabstop>textKomponente_20</tabstop>
+  <tabstop>textMenge_21</tabstop>
+  <tabstop>textEinheit_21</tabstop>
+  <tabstop>textKomponente_21</tabstop>
+  <tabstop>textMenge_22</tabstop>
+  <tabstop>textEinheit_22</tabstop>
+  <tabstop>textKomponente_22</tabstop>
+  <tabstop>textMenge_23</tabstop>
+  <tabstop>textEinheit_23</tabstop>
+  <tabstop>textKomponente_23</tabstop>
+  <tabstop>textMenge_24</tabstop>
+  <tabstop>textEinheit_24</tabstop>
+  <tabstop>textKomponente_24</tabstop>
+  <tabstop>textMenge_25</tabstop>
+  <tabstop>textEinheit_25</tabstop>
+  <tabstop>textKomponente_25</tabstop>
+  <tabstop>textPersonen</tabstop>
+  <tabstop>textAnleitung</tabstop>
+  <tabstop>textDauer</tabstop>
+  <tabstop>btnHinzufuegen</tabstop>
+  <tabstop>btnAbbrechen</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
