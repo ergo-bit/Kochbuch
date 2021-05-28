@@ -39,7 +39,7 @@ background-color: rgb(180, 180, 175)
     <string>Einkaufsliste</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btnHinzufuegen">
+  <widget class="QPushButton" name="btnDokumentErstellen">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -71,7 +71,7 @@ background-color: rgb(80, 190, 160);
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="btnHinzufuegen_2">
+  <widget class="QPushButton" name="btnListeLeeren">
    <property name="geometry">
     <rect>
      <x>210</x>

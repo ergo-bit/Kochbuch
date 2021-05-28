@@ -70,7 +70,7 @@ text-align: center;
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>160</y>
+      <y>155</y>
       <width>141</width>
       <height>36</height>
      </rect>
@@ -99,7 +99,7 @@ background-color: rgb(190, 150, 210);
     <property name="geometry">
      <rect>
       <x>155</x>
-      <y>160</y>
+      <y>155</y>
       <width>141</width>
       <height>36</height>
      </rect>
@@ -128,7 +128,7 @@ background-color: rgb(80, 190, 160);
     <property name="geometry">
      <rect>
       <x>300</x>
-      <y>160</y>
+      <y>155</y>
       <width>141</width>
       <height>36</height>
      </rect>
@@ -157,7 +157,7 @@ background-color: rgb(100, 170, 210);
     <property name="geometry">
      <rect>
       <x>445</x>
-      <y>160</y>
+      <y>155</y>
       <width>141</width>
       <height>36</height>
      </rect>
@@ -186,7 +186,7 @@ background-color: rgb(230, 130, 150);
     <property name="geometry">
      <rect>
       <x>590</x>
-      <y>160</y>
+      <y>155</y>
       <width>141</width>
       <height>36</height>
      </rect>
@@ -215,7 +215,7 @@ background-color: rgb(255, 240, 160);
     <property name="geometry">
      <rect>
       <x>735</x>
-      <y>160</y>
+      <y>155</y>
       <width>141</width>
       <height>36</height>
      </rect>
@@ -314,10 +314,16 @@ background-color: lightgray;
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>205</y>
+      <y>200</y>
       <width>886</width>
-      <height>431</height>
+      <height>401</height>
      </rect>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::SingleSelection</enum>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectItems</enum>
     </property>
    </widget>
    <widget class="QPushButton" name="btnSuchen">
@@ -349,6 +355,35 @@ background-color: lightgray;
     </property>
     <property name="text">
      <string>Suchen</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnZurEinkaufslisteHinzufuegen">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>604</y>
+      <width>301</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Blackadder ITC</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+border: 1px solid grey;
+border-radius: 5px;
+text-align: center;
+background-color: rgb(80, 190, 160);
+}
+</string>
+    </property>
+    <property name="text">
+     <string>zur Einkaufsliste hinzufügen</string>
     </property>
    </widget>
   </widget>

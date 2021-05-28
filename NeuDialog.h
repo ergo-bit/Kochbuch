@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QKeyEvent>
 #include <QLineEdit>
+#include <QDebug>
 
 namespace Ui {
 class NeuDialog;
@@ -19,6 +20,17 @@ public:
 
 private slots:
     void on_btnAbbrechen_clicked();
+
+    void on_btnHinzufuegen_clicked();
+
+    void on_textGerichtName_editingFinished();
+    void on_textGerichtName_returnPressed();
+
+    void on_textPersonen_editingFinished();
+    void on_textPersonen_returnPressed();
+
+    void on_textDauer_editingFinished();
+    void on_textDauer_returnPressed();
 
 private:
     Ui::NeuDialog *ui;

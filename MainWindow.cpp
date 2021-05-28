@@ -2,9 +2,16 @@
 #include "ui_MainWindow.h"
 
 #include "DAOLib.h"
+#include "GerichteDAO.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
+    // Deutsche Übersetzung der Qt-Texte laden
+    sysTranslator = new QTranslator();
+    bSysTranslatorLoaded = sysTranslator->load("qt_de", QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+    if (bSysTranslatorLoaded)
+        qApp->installTranslator(sysTranslator);
+
     ui->setupUi(this);
 
     init();
@@ -30,43 +37,86 @@ void MainWindow::init()
     statusBar()->addWidget(statusLabel, 1);
 
     // Menüeinträge aktivieren mit 'enableDatabase'
-//    enableDatabase(openDatabase("DESKTOP-PNDMIUO\\SQLEXPRESS",       // localhost ist letzlich die flexible Angabe der IP-Adresse
-//                                "dueck"));                           // Name der Datenbank
+    enableDatabase(openDatabase("DESKTOP-PNDMIUO\\SQLEXPRESS",       // localhost ist letzlich die flexible Angabe der IP-Adresse
+                                "dueck"));                           // Name der Datenbank
+
+    // Ändert die Text- und Hintergrundfarbe der slektierten Zeile der TableView
+    // damit die Selektion auch beim Fokusverlust durch Anzeige des Dialogs
+    // sichtbar bleibt.
+    QPalette pal = ui->tableView->palette();
+    pal.setColor(QPalette::HighlightedText, Qt::white);
+    pal.setColor(QPalette::Highlight, QColor(18, 125, 230));
+    ui->tableView->setPalette(pal);
+
+    showTable();
+}
+
+void MainWindow::enableDatabase(bool bEnable)
+{
+    // Menüeinträge aktivieren mit 'enableDatabase'
+    ui->menuStammdaten->setEnabled(bEnable);
+    ui->menu_Extras->setEnabled(bEnable);
+
+    if (bEnable)
+    {
+        statusLabel->setText("Datenbank: " + DAOLib::getDatabaseName());
+    }
+    else
+    {
+        statusLabel->setText("Datenbank: (keine)");
+    }
 
 }
 
-//void MainWindow::enableDatabase(bool bEnable)
-//{
-//    // Menüeinträge aktivieren mit 'enableDatabase'
-//    ui->menuStammdaten->setEnabled(bEnable);
-//    ui->menu_Extras->setEnabled(bEnable);
+bool MainWindow::openDatabase(const QString &server, const QString &databaseN)
+{
+    QString driver = "QODBC";                        // 'QODBC' = open database connectivity
+    QString driverName = "DRIVER={SQL Server}";
 
-//    if (bEnable)
-//    {
-//        statusLabel->setText("Datenbank: " + DAOLib::getDatabaseName());
-//    }
-//    else
-//    {
-//        statusLabel->setText("Datenbank: (keine)");
-//    }
+    // öffnen der Datenbank
+    // #include "DAOLib.h"
+    return DAOLib::connectToDatabase(driver, driverName, server, databaseN);
+}
 
-//}
+void MainWindow::showTable()
+{
+    // Ein TableModel als Datenquelle für die TableView verwenden
+    QSqlTableModel* model = setTableViewModel();
 
-//bool MainWindow::openDatabase(const QString &server, const QString &databaseN)
-//{
-//    QString driver = "QODBC";                        // 'QODBC' = open database connectivity
-//    QString driverName = "DRIVER={SQL Server}";
+    // Schriftgrösse der Spaltenüberschriften etwas größer setzen
+    QFont font = ui->tableView->horizontalHeader()->font();
+    font.setPixelSize(14);
+    ui->tableView->horizontalHeader()->setFont(font);
 
-//    // öffnen der Datenbank
-//    // #include "DAOLib.h"
-//    return DAOLib::connectToDatabase(driver, driverName, server, databaseN);
-//}
+    // Schriftfarbe der Spaltenüberschriften ändern
+    ui->tableView->horizontalHeader()->setStyleSheet("color: blue;");
 
-//void MainWindow::closeEvent(QCloseEvent *)
-//{
-//    // Datenbank Schliessen
-//    DAOLib::closeConnection();
-//}
+    // Hintergrundfarbe der Spaltenüberschriften ändern
+    ui->tableView->setStyleSheet("QHeaderView::section {background-color: lightgrey;}");
+
+    // Alle Spaltenüberschriften linksbündig
+    ui->tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
+
+
+    // Spalte PRIMARYKEY unsichtbar machen
+    ui->tableView->hideColumn(model->record().indexOf("PRIMARYKEY"));
+    // Spalte TIMESTAMP unsichtbar machen
+    ui->tableView->hideColumn(model->record().indexOf("TIMESTAMP"));
+
+    // Die letzte Spalte (ORT) nimmt die gesamte restliche Breite der TableView ein
+//    ui->tableView->horizontalHeader()->setStretchLastSection(true);
+
+    // Erste Zeile in der TableView auswählen
+//    if (model->rowCount() > 0)
+//        ui->tableView->selectRow(0);
+
+}
+
+void MainWindow::closeEvent(QCloseEvent *)
+{
+    // Datenbank Schliessen
+    DAOLib::closeConnection();
+}
 
 void MainWindow::newMeal()
 {   
@@ -111,22 +161,24 @@ void MainWindow::shoppingList()
 
 
 
-
 // Slots:
-void MainWindow::on_textSuchen_returnPressed()
-{
-    this->focusNextChild();
-}
-
-void MainWindow::on_textSuchen_editingFinished()
-{
-    //setSchriftSize();
-}
-
 void MainWindow::on_actionB_eenden_triggered()
 {
     close();
 }
+
+
+// textSuchen
+void MainWindow::on_textSuchen_returnPressed()
+{
+    this->focusNextChild();
+}
+void MainWindow::on_textSuchen_editingFinished()
+{
+
+}
+
+
 
 void MainWindow::on_btnNeu_clicked()
 {

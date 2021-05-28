@@ -30,7 +30,9 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-unix:!macx: LIBS += -L$$PWD/../build-DAOLib-Desktop_Qt_6_1_0_MinGW_64_bit-Debug/ -lDAOLib
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../build-DAOLib-Desktop_Qt_6_1_0_MinGW_64_bit-Debug/release/ -lDAOLib
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-DAOLib-Desktop_Qt_6_1_0_MinGW_64_bit-Debug/debug/ -lDAOLib
 
 INCLUDEPATH += $$PWD/../DAOLib
 DEPENDPATH += $$PWD/../DAOLib

@@ -6,6 +6,11 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QDebug>
+#include <QTranslator>
+#include <QLibraryInfo>
+#include <QSaveFile>
+#include <QMessageBox>
+#include <QSqlTableModel>
 
 #include "NeuDialog.h"
 #include "EinkaufslisteDialog.h"
@@ -23,36 +28,44 @@ public:
     ~MainWindow();
 
 private slots:
+    void on_actionB_eenden_triggered();
+
     void on_textSuchen_returnPressed();
     void on_textSuchen_editingFinished();
-
-    void on_actionB_eenden_triggered();
 
     void on_btnNeu_clicked();
     void on_action_Neu_2_triggered();
 
-
     void on_btnEinkaufsliste_clicked();
-
     void on_actionZur_Einkaufs_liste_triggered();
 
 private:
     Ui::MainWindow *ui;
-    // #include <QLabel>
     QLabel* statusLabel;
     NeuDialog* newMealDlg = nullptr;
     EinkaufslisteDialog* shoppingListDlg = nullptr;
+    QString actFile;
+    QTranslator* sysTranslator;
+    bool bSysTranslatorLoaded;
+    QSqlTableModel* setTableViewModel();
+
 
     void init();
 
     void enableDatabase(bool);
-    bool openDatabase(const QString& server,
-                      const QString& databaseN); // Name der Datenban
-    //void closeEvent(QCloseEvent* event) override;
+    bool openDatabase(const QString& server, const QString& databaseN); // Name der Datenbank
 
+    void showTable();
     void newMeal();
     void shoppingList();
-
     void importGerichtIntoDatabase();
+
+    bool saveFile(const QString& filename);
+    bool saveFileAs();
+    bool queryExit();
+    bool querySave();
+    void closeEvent(QCloseEvent* event) override;
+
+
 };
 #endif // MAINWINDOW_H
