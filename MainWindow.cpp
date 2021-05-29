@@ -40,6 +40,9 @@ void MainWindow::init()
     enableDatabase(openDatabase("DESKTOP-PNDMIUO\\SQLEXPRESS",       // localhost ist letzlich die flexible Angabe der IP-Adresse
                                 "dueck"));                           // Name der Datenbank
 
+    // Einen Event-Filter zur TableView hinzufügen
+    ui->tableView->installEventFilter(this);
+
     // Ändert die Text- und Hintergrundfarbe der slektierten Zeile der TableView
     // damit die Selektion auch beim Fokusverlust durch Anzeige des Dialogs
     // sichtbar bleibt.
@@ -80,36 +83,76 @@ bool MainWindow::openDatabase(const QString &server, const QString &databaseN)
 
 void MainWindow::showTable()
 {
-    // Ein TableModel als Datenquelle für die TableView verwenden
-    QSqlTableModel* model = setTableViewModel();
+//    // Ein TableModel als Datenquelle für die tableView verwenden
+//    QSqlTableModel* model = setTableViewModel();
 
-    // Schriftgrösse der Spaltenüberschriften etwas größer setzen
-    QFont font = ui->tableView->horizontalHeader()->font();
-    font.setPixelSize(14);
-    ui->tableView->horizontalHeader()->setFont(font);
+//    // Schriftgrösse der Spaltenüberschriften etwas größer setzen
+//    QFont font = ui->tableView->horizontalHeader()->font();
+//    font.setPixelSize(14);
+//    ui->tableView->horizontalHeader()->setFont(font);
 
-    // Schriftfarbe der Spaltenüberschriften ändern
-    ui->tableView->horizontalHeader()->setStyleSheet("color: blue;");
+//    // Schriftfarbe der Spaltenüberschriften ändern
+//    ui->tableView->horizontalHeader()->setStyleSheet("color: blue;");
 
-    // Hintergrundfarbe der Spaltenüberschriften ändern
-    ui->tableView->setStyleSheet("QHeaderView::section {background-color: lightgrey;}");
+//    // Hintergrundfarbe der Spaltenüberschriften ändern
+//    ui->tableView->setStyleSheet("QHeaderView::section {background-color: lightgrey;}");
 
-    // Alle Spaltenüberschriften linksbündig
-    ui->tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
+//    // Alle Spaltenüberschriften linksbündig
+//    ui->tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
 
 
-    // Spalte PRIMARYKEY unsichtbar machen
-    ui->tableView->hideColumn(model->record().indexOf("PRIMARYKEY"));
-    // Spalte TIMESTAMP unsichtbar machen
-    ui->tableView->hideColumn(model->record().indexOf("TIMESTAMP"));
+//    // Spalte PRIMARYKEY unsichtbar machen
+//    ui->tableView->hideColumn(model->record().indexOf("PRIMARYKEY"));
+//    // Spalte TIMESTAMP unsichtbar machen
+//    ui->tableView->hideColumn(model->record().indexOf("TIMESTAMP"));
 
-    // Die letzte Spalte (ORT) nimmt die gesamte restliche Breite der TableView ein
+//    // Die letzte Spalte (ORT) nimmt die gesamte restliche Breite der TableView ein
 //    ui->tableView->horizontalHeader()->setStretchLastSection(true);
 
     // Erste Zeile in der TableView auswählen
 //    if (model->rowCount() > 0)
 //        ui->tableView->selectRow(0);
 
+}
+
+QSqlTableModel *MainWindow::setTableViewModel()
+{
+
+//    // Ein evtl. bereits vorhandenes Datenmodell löschen
+//    delete ui->tableView->model();
+
+//    QSqlTableModel* model = GerichteDAO::readGerichteIntoTableModel();
+
+//    // Aufsteigende Sortierung nach Postleitzahl
+//    model->sort(model->record().indexOf("PLZ"), Qt::SortOrder::AscendingOrder);
+
+//    // Spaltenüberschriften der Tabelle setzen
+//    model->setHeaderData(model->record().indexOf("PLZ"), Qt::Horizontal, "Postleitzahl");
+//    model->setHeaderData(model->record().indexOf("ORT"), Qt::Horizontal, "Ort");
+
+//    // Das Datenmodell zuweisen
+//    ui->tableView->setModel(model);
+
+//    // Die TableView liest initial nur die ersten 256 Datensätze.
+//    // Das ist in der TableView festgelegt.
+
+//    // Wenn aber von Anfang an alle Datensätze benötigt werden, kann man
+//    // mit folgender Anweisung die vollständige Azahl der Datensätze
+//    // im Datenmodell ermitteln.
+//    while(model->canFetchMore())
+//        model->fetchMore();
+
+
+//    // Das Signal selectionChanged mit dem Slot tableView_slectionChanged verbinden.
+//    // Über diesen Slot wird die aktuelle Zeilennummer von allen Zeilen in der TableView
+//    // in der Statusbar angezeigt.
+//    // Der eigene Slot tableView_selectionChanged() benötigt die beiden Argumente QItemSelection,
+//    // welche vom Signal gesendet werden nicht. Deshalb werden sie auch nicht an den Slot
+//    // weitergegeben.
+//    connect(ui->tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
+//                        this, SLOT(tableView_selectionChanged()));
+
+//    return model;
 }
 
 void MainWindow::closeEvent(QCloseEvent *)

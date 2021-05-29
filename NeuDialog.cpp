@@ -48,6 +48,31 @@ void NeuDialog::init()
     ui->textMenge_25->installEventFilter(this);
 }
 
+QString NeuDialog::getGerichtName(const QString &mealName)
+{
+
+}
+
+QString NeuDialog::getKategorie(const QString &category)
+{
+
+}
+
+QString NeuDialog::getDauer(const QString &time)
+{
+
+}
+
+QString NeuDialog::getPersonenZahl(const QString &numberOfPeople)
+{
+
+}
+
+void NeuDialog::importGerichtIntoDatabase(const QString &mealName, const QString &category, const QString &time, const QString &numberOfPeople)
+{
+
+}
+
 bool NeuDialog::eventFilter(QObject *absender, QEvent *event)
 {
     // Uns interessiert die Eingabe über die Tastatur
@@ -156,7 +181,7 @@ void NeuDialog::on_btnAbbrechen_clicked()
 
 void NeuDialog::on_btnHinzufuegen_clicked()
 {
-
+    importGerichtIntoDatabase();
 }
 
 

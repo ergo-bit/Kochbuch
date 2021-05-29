@@ -58,7 +58,7 @@ private:
     void showTable();
     void newMeal();
     void shoppingList();
-    void importGerichtIntoDatabase();
+
 
     bool saveFile(const QString& filename);
     bool saveFileAs();

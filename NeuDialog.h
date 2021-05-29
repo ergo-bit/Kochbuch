@@ -36,11 +36,17 @@ private:
     Ui::NeuDialog *ui;
 
     void init();
+    QString getGerichtName(const QString& mealName);
+    QString getKategorie(const QString& category);
+    QString getDauer(const QString& time);
+    QString getPersonenZahl(const QString& numberOfPeople);
+    void importGerichtIntoDatabase(const QString &mealName, const QString &category, const QString &time, const QString &numberOfPeople);
     bool eventFilter(QObject* absender, QEvent* event) override;
     bool isControlKey(int key);     // Prueft ob es sich bei dem Tastaturcode um Steuertastenhandelt
                                     // z.B. Key_Return, Key_Delete, Key_Home, Key_End, Key_Left etc...
     // #include <QLineEdit>
     int convertTextFieldToValue(QLineEdit* tf, QChar c);
+
 };
 
 #endif // NEUDIALOG_H
