@@ -237,8 +237,6 @@ void NeuDialog::on_btnAbbrechen_clicked()
 
 void NeuDialog::on_btnHinzufuegen_clicked()
 {
-    qDebug() << "Hinzufügen";
-
     // fuer die GerichteDAO:
     QString mealName = QString(ui->textGerichtName->text());
     QString duration = QString(ui->textDauer->text());

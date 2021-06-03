@@ -29,11 +29,36 @@ private slots:
     void on_btnAbbrechen_clicked();
     void on_btnEtwasAendern_clicked();
 
+    void on_rbFruehstueck_clicked();
+    void on_rbMittag_clicked();
+    void on_rbAbendbrot_clicked();
+    void on_rbSnack_clicked();
+    void on_rbNachtisch_clicked();
+
+    void on_btnSpeichern_clicked();
+
+    void on_textGerichtName_returnPressed();
+
+    void on_textGerichtName_textChanged(const QString &arg1);
+
+    void on_textPersonen_returnPressed();
+
+    void on_textPersonen_textChanged(const QString &arg1);
+
+    void on_textAnleitung_textChanged();
+
+    void on_textDauer_returnPressed();
+
+    void on_textDauer_textChanged(const QString &arg1);
+
 private:
     Ui::GerichtDetailsDialog *ui;
     qint64 dlgKey;
     QString timeStamp;
     bool isModified;
+    QString category = QString("");
+    QString mealName = QString("");
+
 
 
     void init();
@@ -42,6 +67,8 @@ private:
     void reject() override;
     bool querySave();
     bool saveEntry();
+    bool entryIsValid();
+    bool updateEntry(qint64 key);
 };
 
 #endif // GERICHTDETAILSDIALOG_H

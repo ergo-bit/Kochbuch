@@ -25,6 +25,8 @@ void GerichtDetailsDialog::init()
 
     if (dlgKey > 0)
         readEntry(dlgKey);
+
+    ui->btnSpeichern->setEnabled(false);
 }
 
 void GerichtDetailsDialog::readEntry(qint64 key)
@@ -40,7 +42,7 @@ void GerichtDetailsDialog::readEntry(qint64 key)
     ui->textPersonen->setText(meal->getPersonen());
     ui->textAnleitung->setText(meal->getZubereitung());
 
-
+    mealName = QString(ui->textGerichtName->text());
 
     // Informationen aus Tabelle 'Zutaten' einlesen
     Zutat* ingredient = ZutatenDAO::readZutat(key);
@@ -48,8 +50,6 @@ void GerichtDetailsDialog::readEntry(qint64 key)
         return;
 
     ui->textEinheit_1->setText(ingredient->getEinheit());
-
-
 
 
     isModified = false;
@@ -89,13 +89,13 @@ bool GerichtDetailsDialog::querySave()
                                          QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
                                          QMessageBox::Cancel);
 
-    // Änderungen verwerfen und Dialog schließen
+    // Änderungen verwerfen
     if (msgValue == QMessageBox::Discard)
         retValue = true;
-    // Abbrechen, zurück in den Dialog
+    // Abbrechen
     else if (msgValue == QMessageBox::Cancel)
         retValue = false;
-    // Speichern, wenn erfolgreich Dialog schließen
+    // Speichern
     else
         retValue = saveEntry();
 
@@ -106,20 +106,72 @@ bool GerichtDetailsDialog::saveEntry()
 {
     bool retValue = false;
 
-//    if (!entryIsValid())
-//        return retValue;
+    if (!entryIsValid())
+        return retValue;
 
-//    if (dlgKey > 0)
-//        retValue = updateEntry(dlgKey);
-//    else
-//        retValue = insertEntry();
+    retValue = updateEntry(dlgKey);
 
-//    if (retValue)
-//        emit refreshData(dlgKey);
+    if (retValue)
+        emit refreshData(dlgKey);
 
     // Modified Flag setzen
     isModified = !retValue;
     return retValue;
+}
+
+bool GerichtDetailsDialog::entryIsValid()
+{
+    bool retValue = true;
+
+        if (ui->textGerichtName->text().length() == 0)
+        {
+            QMessageBox::critical(this, this->windowTitle(), "Ein Name für das Gericht fehlt.");
+            ui->textGerichtName->setFocus();
+            retValue = false;
+        }
+        else if (ui->textPersonen->text().length() == 0)
+        {
+            QMessageBox::critical(this, this->windowTitle(), "Eine Angabe zu Personenzahl fehlt.");
+            ui->textPersonen->setFocus();
+            retValue = false;
+        }
+        else if (GerichteDAO::GerichtExists(ui->textGerichtName->text()))
+        {
+            QMessageBox::critical(this, this->windowTitle(), "Gericht ist bereits vorhanden");
+            ui->textGerichtName->setFocus();
+            retValue = false;
+        }
+
+        return retValue;
+}
+
+bool GerichtDetailsDialog::updateEntry(qint64 key)
+{
+    bool retValue = false;
+    // Vor dem Update prüfen, ob der TimeStamp des Datensatzes
+        // in der Zwischenzeit durch einen anderen Benutzer geändert wurde.
+        Gericht* meal = GerichteDAO::readGericht(key);
+        if (meal == nullptr)
+            return false;
+
+
+//        QString currentTimeStamp = meal->getTimeStamp();
+
+        // Objekt meal vom Heap löschen
+        delete meal;
+
+//        if (timeStamp != currentTimeStamp)
+//        {
+//            QMessageBox::warning(this, this->windowTitle(),
+//                                 "Dieser Eintrag wurde in der Zwischenzeit von einen anderen Benutzer geändert");
+
+//            return true;
+//        }
+
+        ZutatenDAO::updateZutat(ui->textGerichtName->text(), mealName);
+        retValue = GerichteDAO::updateGericht(key, ui->textGerichtName->text(), category ,ui->textDauer->text(), ui->textPersonen->text());
+
+        return retValue;
 }
 
 
@@ -245,5 +297,75 @@ void GerichtDetailsDialog::on_btnEtwasAendern_clicked()
     ui->textDauer->setEnabled(true);
     ui->textPersonen->setEnabled(true);
     ui->textAnleitung->setEnabled(true);
+}
+
+void GerichtDetailsDialog::on_btnSpeichern_clicked()
+{
+    if (isModified)
+    {
+        if (!saveEntry())
+            return;
+    }
+
+    close();
+}
+
+// RadioBoxen der Kategorien
+void GerichtDetailsDialog::on_rbFruehstueck_clicked()
+{
+    category = QString("Frühstück");
+}
+void GerichtDetailsDialog::on_rbMittag_clicked()
+{
+    category = QString("Mittag");
+}
+void GerichtDetailsDialog::on_rbAbendbrot_clicked()
+{
+    category = QString("Abendbrot");
+}
+void GerichtDetailsDialog::on_rbSnack_clicked()
+{
+    category = QString("Snack");
+}
+void GerichtDetailsDialog::on_rbNachtisch_clicked()
+{
+    category = QString("Nachtisch");
+}
+
+// textFelder
+void GerichtDetailsDialog::on_textGerichtName_returnPressed()
+{
+    this->focusNextChild();
+}
+void GerichtDetailsDialog::on_textGerichtName_textChanged(const QString &)
+{
+    ui->btnSpeichern->setEnabled(true);
+    isModified = true;
+}
+
+void GerichtDetailsDialog::on_textPersonen_returnPressed()
+{
+    this->focusNextChild();
+}
+void GerichtDetailsDialog::on_textPersonen_textChanged(const QString &)
+{
+    ui->btnSpeichern->setEnabled(true);
+    isModified = true;
+}
+
+void GerichtDetailsDialog::on_textAnleitung_textChanged()
+{
+    ui->btnSpeichern->setEnabled(true);
+    isModified = true;
+}
+
+void GerichtDetailsDialog::on_textDauer_returnPressed()
+{
+    this->focusNextChild();
+}
+void GerichtDetailsDialog::on_textDauer_textChanged(const QString &)
+{
+    ui->btnSpeichern->setEnabled(true);
+    isModified = true;
 }
 

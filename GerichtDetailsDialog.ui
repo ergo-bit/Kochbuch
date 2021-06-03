@@ -35,7 +35,7 @@ background-color: rgb(180, 180, 175)
   <widget class="QPushButton" name="btnEtwasAendern">
    <property name="geometry">
     <rect>
-     <x>355</x>
+     <x>215</x>
      <y>770</y>
      <width>191</width>
      <height>36</height>
@@ -52,6 +52,8 @@ background-color: rgb(180, 180, 175)
 {
 border: 1px solid grey;
 border-radius: 5px;
+border-top-right-radius: 0px;
+border-bottom-right-radius: 0px;
 text-align: center;
 background-color: rgb(80, 190, 160);
 }
@@ -64,10 +66,10 @@ background-color: rgb(80, 190, 160);
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="btnAbbrechen">
+  <widget class="QPushButton" name="btnSpeichern">
    <property name="geometry">
     <rect>
-     <x>555</x>
+     <x>405</x>
      <y>770</y>
      <width>141</width>
      <height>36</height>
@@ -84,13 +86,15 @@ background-color: rgb(80, 190, 160);
 {
 border: 1px solid grey;
 border-radius: 5px;
+border-top-left-radius: 0px;
+border-bottom-left-radius: 0px;
 text-align: center;
-background-color: lightgray;
+background-color: rgb(80, 190, 160);
 }
 </string>
    </property>
    <property name="text">
-    <string>Abbrechen</string>
+    <string>Speichern</string>
    </property>
    <property name="autoDefault">
     <bool>false</bool>
@@ -1434,6 +1438,38 @@ background-color: lightgray;
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QPushButton" name="btnAbbrechen">
+   <property name="geometry">
+    <rect>
+     <x>555</x>
+     <y>770</y>
+     <width>141</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Blackadder ITC</family>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton
+{
+border: 1px solid grey;
+border-radius: 5px;
+text-align: center;
+background-color: lightgray;
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Abbrechen</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>textGerichtName</tabstop>
@@ -1521,7 +1557,7 @@ background-color: lightgray;
   <tabstop>textAnleitung</tabstop>
   <tabstop>textDauer</tabstop>
   <tabstop>btnEtwasAendern</tabstop>
-  <tabstop>btnAbbrechen</tabstop>
+  <tabstop>btnSpeichern</tabstop>
  </tabstops>
  <resources/>
  <connections/>

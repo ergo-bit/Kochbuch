@@ -16,6 +16,8 @@
 
 #include "NeuDialog.h"
 #include "EinkaufslisteDialog.h"
+#include "GerichteDAO.h"
+#include "Gericht.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -54,8 +56,9 @@ private slots:
     void on_btnSnack_clicked();
     void on_btnNachtisch_clicked();
 
-
     void on_textPersonen_returnPressed();
+    void on_textPersonen_editingFinished();
+    void updateTableView(const qint64);
 
     void on_textPersonen_textChanged(const QString &arg1);
 
@@ -74,23 +77,25 @@ private:
 
     void init();
     void enableDatabase(bool);
-    bool openDatabase(const QString& server, const QString& databaseN); // Name der Datenbank
+    bool openDatabase(const QString& server, const QString& databaseN);
+    void closeEvent(QCloseEvent* event) override;
     void showTable();
 //    QSqlTableModel* setTableViewModel();
     QSqlQueryModel* setTableViewModel();
-    void newMeal();
+    void newMeal(const qint64 key);
     void showGerichtDetailsDialog(const qint64 key);
     void shoppingList();
     void deleteEntry(const QModelIndex index);
     bool eventFilter(QObject* absender, QEvent* event) override;
     bool isControlKey(int key);
     int convertTextFieldToValue(QLineEdit* tf, QChar keyCharacter);
+    void findItemInTableView(const QString& columnName, const QVariant& value);
 
     bool saveFile(const QString& filename);
     bool saveFileAs();
     bool queryExit();
     bool querySave();
-    void closeEvent(QCloseEvent* event) override;
+
 
 
 };

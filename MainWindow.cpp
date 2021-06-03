@@ -28,7 +28,8 @@ MainWindow::~MainWindow()
 
 // private Methoden:
 void MainWindow::init()
-{    
+{
+    ui->btnZurEinkaufslisteHinzufuegen->setEnabled(false);
     // Einen neuen Label erstellen für die Anzeige der geladenen Datenbank in der Statusanzeige
     statusLabel = new QLabel();
     // Labeltext innerhalb des Labels einrücken
@@ -44,9 +45,6 @@ void MainWindow::init()
 
     // Einen Event-Filter zur TableView hinzufügen
     ui->tableView->installEventFilter(this);
-
-    // Der 'Zur Einkaufsliste hinzufügen'-Button ist per default nicht aktiv
-    ui->btnZurEinkaufslisteHinzufuegen->setEnabled(false);
 
     // Eine leere Zeichenkette für die Kategorien anlegen
     category = QString();
@@ -87,6 +85,12 @@ bool MainWindow::openDatabase(const QString &server, const QString &databaseN)
     // öffnen der Datenbank
     // #include "DAOLib.h"
     return DAOLib::connectToDatabase(driver, driverName, server, databaseN);
+}
+
+void MainWindow::closeEvent(QCloseEvent *)
+{
+    // Datenbank Schliessen
+    DAOLib::closeConnection();
 }
 
 void MainWindow::showTable()
@@ -170,13 +174,7 @@ QSqlQueryModel *MainWindow::setTableViewModel()
     return model;
 }
 
-void MainWindow::closeEvent(QCloseEvent *)
-{
-    // Datenbank Schliessen
-    DAOLib::closeConnection();
-}
-
-void MainWindow::newMeal()
+void MainWindow::newMeal(const qint64 key)
 {   
     // Erstellen eines nicht-modalen Dialogs
     if (newMealDlg == nullptr)
@@ -209,6 +207,9 @@ void MainWindow::newMeal()
             newMealDlg->show();
         }
     }
+    GerichtDetailsDialog gerichtDetailsDialog(key, this);
+    // Die Signale für UPDATE und INSERT mit dem Slot verbinden
+    connect(&gerichtDetailsDialog, SIGNAL(refreshData(const qint64)), this, SLOT(updateTableView(const qint64)));
 }
 
 void MainWindow::showGerichtDetailsDialog(const qint64 key)
@@ -367,6 +368,45 @@ int MainWindow::convertTextFieldToValue(QLineEdit *tf, QChar keyCharacter)
     return s.toInt();
 }
 
+void MainWindow::findItemInTableView(const QString &columnName, const QVariant &value)
+{
+    int row;
+    bool found = false;
+
+    // Konvertieren des Datenmodells in ein QSqlTableModel
+    QSqlTableModel* model = static_cast<QSqlTableModel*>(ui->tableView->model());
+
+    // Auf die Datensätze innerhalb des Datenmodells zugreifen
+    QSqlQuery query = model->query();
+
+    // Spaltenindex des Spaltennames über das Datenmodell ermitteln
+    int colIndex = model->record().indexOf(columnName);
+    if (colIndex < 0)
+        return;
+
+    // Auf den ersten Eintrag der Query positionieren
+    query.first();
+
+    row = query.at();
+
+    do
+    {
+        if (query.value(colIndex).toString().contains(value.toString(), Qt::CaseInsensitive))
+        {
+            found = true;
+            break;
+        }
+
+        row++;
+
+    } while (query.next());
+
+    if (found)
+        ui->tableView->selectRow(row);
+    else
+        ui->tableView->selectRow(0);
+}
+
 
 
 
@@ -402,11 +442,11 @@ void MainWindow::on_btnSuchen_clicked()
 // Neu
 void MainWindow::on_btnNeu_clicked()
 {
-    newMeal();
+    newMeal(-1);
 }
 void MainWindow::on_action_Neu_2_triggered()
 {
-    newMeal();
+    newMeal(-1);
 }
 
 // Einkaufsliste
@@ -465,14 +505,31 @@ void MainWindow::on_btnNachtisch_clicked()
     setTableViewModel();
 }
 
-// Personen
+// textPersonen
 void MainWindow::on_textPersonen_returnPressed()
-{
-    ui->textPersonen->text();
-    ui->btnZurEinkaufslisteHinzufuegen->setEnabled(true);
-}
-void MainWindow::on_textPersonen_textChanged(const QString &)
 {
     this->focusNextChild();
 }
+void MainWindow::on_textPersonen_editingFinished()
+{
+    ui->textPersonen->text();
+}
+void MainWindow::on_textPersonen_textChanged(const QString &)
+{
+    ui->btnZurEinkaufslisteHinzufuegen->setEnabled(true);
+}
+
+void MainWindow::updateTableView(const qint64 key)
+{
+    statusLabel->setText("Einträge werden aktualisiert...");
+    QApplication::processEvents();
+
+    setTableViewModel();
+
+    // Den Cursor auf den geänderten Eintrag positionieren
+    findItemInTableView("PRIMARYKEY", QVariant(key));
+}
+
+
+
 

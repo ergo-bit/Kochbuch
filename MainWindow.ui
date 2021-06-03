@@ -372,9 +372,12 @@ background-color: lightgray;
     </property>
    </widget>
    <widget class="QPushButton" name="btnZurEinkaufslisteHinzufuegen">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>225</x>
+      <x>235</x>
       <y>570</y>
       <width>286</width>
       <height>31</height>
@@ -424,7 +427,7 @@ background-color: rgb(80, 190, 160);
      <rect>
       <x>125</x>
       <y>575</y>
-      <width>26</width>
+      <width>36</width>
       <height>20</height>
      </rect>
     </property>
@@ -432,7 +435,7 @@ background-color: rgb(80, 190, 160);
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>160</x>
+      <x>170</x>
       <y>570</y>
       <width>51</width>
       <height>30</height>
@@ -451,7 +454,7 @@ background-color: rgb(80, 190, 160);
    <widget class="QPushButton" name="btnGerichtLoeschen">
     <property name="geometry">
      <rect>
-      <x>525</x>
+      <x>530</x>
       <y>570</y>
       <width>141</width>
       <height>31</height>
