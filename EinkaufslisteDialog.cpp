@@ -14,6 +14,7 @@ EinkaufslisteDialog::~EinkaufslisteDialog()
 }
 
 
+
 // private Methoden:
 void EinkaufslisteDialog::init()
 {
@@ -62,20 +63,17 @@ void EinkaufslisteDialog::readFile(const QString &filename)
 }
 
 
-// Slots:
 
+// Slots:
 void EinkaufslisteDialog::on_btnAbbrechen_2_clicked()
 {
     close();
 }
 
-
-
 void EinkaufslisteDialog::on_btnDokumentErstellen_clicked()
 {
 
 }
-
 
 void EinkaufslisteDialog::on_btnListeLeeren_clicked()
 {

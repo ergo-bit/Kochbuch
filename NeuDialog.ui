@@ -7,8 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>730</width>
-    <height>824</height>
+    <height>820</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>730</width>
+    <height>820</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>730</width>
+    <height>820</height>
+   </size>
   </property>
   <property name="font">
    <font>
@@ -129,6 +141,9 @@ background-color: lightgray;
    <property name="text">
     <string>Ein neues Gericht</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QLabel" name="lblKategorie">
    <property name="geometry">
@@ -172,71 +187,6 @@ background-color: lightgray;
    </property>
    <property name="alignment">
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBoxFruestueck">
-   <property name="geometry">
-    <rect>
-     <x>255</x>
-     <y>130</y>
-     <width>86</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Frühstück</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBoxMittag">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>130</y>
-     <width>86</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Mittag</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBoxAbendbrot">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>130</y>
-     <width>86</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Abendbrot</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBoxSnack">
-   <property name="geometry">
-    <rect>
-     <x>535</x>
-     <y>130</y>
-     <width>86</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Snack</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBoxNachtisch">
-   <property name="geometry">
-    <rect>
-     <x>625</x>
-     <y>130</y>
-     <width>86</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Nachtisch</string>
    </property>
   </widget>
   <widget class="QLabel" name="lblAnleitung">
@@ -1107,7 +1057,7 @@ background-color: lightgray;
    </property>
    <property name="font">
     <font>
-     <pointsize>16</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
   </widget>
@@ -1122,7 +1072,7 @@ background-color: lightgray;
    </property>
    <property name="font">
     <font>
-     <pointsize>16</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
   </widget>
@@ -1137,18 +1087,108 @@ background-color: lightgray;
    </property>
    <property name="font">
     <font>
-     <pointsize>16</pointsize>
+     <pointsize>10</pointsize>
     </font>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbFruehstueck">
+   <property name="geometry">
+    <rect>
+     <x>255</x>
+     <y>130</y>
+     <width>82</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Frühstück</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbMittag">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>130</y>
+     <width>82</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Mittag</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbAbendbrot">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>130</y>
+     <width>82</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Abendbrot</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbSnack">
+   <property name="geometry">
+    <rect>
+     <x>535</x>
+     <y>130</y>
+     <width>82</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Snack</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="rbNachtisch">
+   <property name="geometry">
+    <rect>
+     <x>625</x>
+     <y>130</y>
+     <width>82</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Nachtisch</string>
    </property>
   </widget>
  </widget>
  <tabstops>
   <tabstop>textGerichtName</tabstop>
-  <tabstop>checkBoxFruestueck</tabstop>
-  <tabstop>checkBoxMittag</tabstop>
-  <tabstop>checkBoxAbendbrot</tabstop>
-  <tabstop>checkBoxSnack</tabstop>
-  <tabstop>checkBoxNachtisch</tabstop>
+  <tabstop>rbFruehstueck</tabstop>
+  <tabstop>rbMittag</tabstop>
+  <tabstop>rbAbendbrot</tabstop>
+  <tabstop>rbSnack</tabstop>
+  <tabstop>rbNachtisch</tabstop>
   <tabstop>textMenge_1</tabstop>
   <tabstop>textEinheit_1</tabstop>
   <tabstop>textKomponente_1</tabstop>

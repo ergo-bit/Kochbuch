@@ -3,6 +3,8 @@
 
 #include "DAOLib.h"
 #include "GerichteDAO.h"
+#include "ZutatenDAO.h"
+#include "GerichtDetailsDialog.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -26,7 +28,7 @@ MainWindow::~MainWindow()
 
 // private Methoden:
 void MainWindow::init()
-{
+{    
     // Einen neuen Label erstellen für die Anzeige der geladenen Datenbank in der Statusanzeige
     statusLabel = new QLabel();
     // Labeltext innerhalb des Labels einrücken
@@ -42,6 +44,12 @@ void MainWindow::init()
 
     // Einen Event-Filter zur TableView hinzufügen
     ui->tableView->installEventFilter(this);
+
+    // Der 'Zur Einkaufsliste hinzufügen'-Button ist per default nicht aktiv
+    ui->btnZurEinkaufslisteHinzufuegen->setEnabled(false);
+
+    // Eine leere Zeichenkette für die Kategorien anlegen
+    category = QString();
 
     // Ändert die Text- und Hintergrundfarbe der slektierten Zeile der TableView
     // damit die Selektion auch beim Fokusverlust durch Anzeige des Dialogs
@@ -83,76 +91,83 @@ bool MainWindow::openDatabase(const QString &server, const QString &databaseN)
 
 void MainWindow::showTable()
 {
-//    // Ein TableModel als Datenquelle für die tableView verwenden
-//    QSqlTableModel* model = setTableViewModel();
+    // Ein TableModel als Datenquelle für die tableView verwenden
+    QSqlQueryModel* model = setTableViewModel();
 
-//    // Schriftgrösse der Spaltenüberschriften etwas größer setzen
-//    QFont font = ui->tableView->horizontalHeader()->font();
-//    font.setPixelSize(14);
-//    ui->tableView->horizontalHeader()->setFont(font);
-
-//    // Schriftfarbe der Spaltenüberschriften ändern
-//    ui->tableView->horizontalHeader()->setStyleSheet("color: blue;");
-
-//    // Hintergrundfarbe der Spaltenüberschriften ändern
-//    ui->tableView->setStyleSheet("QHeaderView::section {background-color: lightgrey;}");
-
-//    // Alle Spaltenüberschriften linksbündig
-//    ui->tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
+    // Spaltenüberschriften verändern:
+    // Schriftgrösse
+    QFont font = ui->tableView->horizontalHeader()->font();
+    font.setPixelSize(16);
+    ui->tableView->horizontalHeader()->setFont(font);
+    // Schriftfarbe
+    ui->tableView->horizontalHeader()->setStyleSheet("color: rgb(180, 180, 175);");
+    // Hintergrundfarbe der Spaltenüberschriften
+    ui->tableView->setStyleSheet("QHeaderView::section {background-color: lightgrey;}");
+    // alle Spaltenüberschriften linksbündig
+    ui->tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft);
 
 
-//    // Spalte PRIMARYKEY unsichtbar machen
-//    ui->tableView->hideColumn(model->record().indexOf("PRIMARYKEY"));
-//    // Spalte TIMESTAMP unsichtbar machen
-//    ui->tableView->hideColumn(model->record().indexOf("TIMESTAMP"));
+    // Spalten ausblenden
+    // PRIMARYKEY
+    ui->tableView->hideColumn(model->record().indexOf("PRIMARYKEY"));
+    // ZUBEREITUNG
+    ui->tableView->hideColumn(model->record().indexOf("ZUBEREITUNG"));
+    // TIMESTAMP
+    ui->tableView->hideColumn(model->record().indexOf("TIMESTAMP"));
 
-//    // Die letzte Spalte (ORT) nimmt die gesamte restliche Breite der TableView ein
-//    ui->tableView->horizontalHeader()->setStretchLastSection(true);
 
-    // Erste Zeile in der TableView auswählen
-//    if (model->rowCount() > 0)
-//        ui->tableView->selectRow(0);
+    // Spaltenbreite verändern
+    // Die Spalten 1, 2 und 3 sollen so breit wie deren breitesterInhalt (also Wort) sein
+    ui->tableView->resizeColumnToContents(1);
+    ui->tableView->resizeColumnToContents(2);
+    ui->tableView->resizeColumnToContents(3);
+    // Die letzte Spalte nimmt die gesamte restliche Breite der TableView ein
+    ui->tableView->horizontalHeader()->setStretchLastSection(true);
 
+
+    // Per default soll die erste Zeile in der TableView ausgewählt sein
+    if (model->rowCount() > 0)
+        ui->tableView->selectRow(0);
 }
 
-QSqlTableModel *MainWindow::setTableViewModel()
+QSqlQueryModel *MainWindow::setTableViewModel()
 {
+    // Ein evtl. bereits vorhandenes Datenmodell löschen
+    delete ui->tableView->model();
 
-//    // Ein evtl. bereits vorhandenes Datenmodell löschen
-//    delete ui->tableView->model();
+    QSqlQueryModel* model;
 
-//    QSqlTableModel* model = GerichteDAO::readGerichteIntoTableModel();
+    if (mealSearched.length() > 0)
+    {
+        // Bei einer Suche
+        model = GerichteDAO::readSearchedGerichteIntoQueryModel(mealSearched);
+    }
+    else if (mealSearched.length() < 1)
+    {
+        // QSqlTableModel* model = GerichteDAO::readGerichteIntoTableModel();
+        model = GerichteDAO::readGerichteIntoQueryModel(category);
+    }
 
-//    // Aufsteigende Sortierung nach Postleitzahl
-//    model->sort(model->record().indexOf("PLZ"), Qt::SortOrder::AscendingOrder);
+    // Spaltenüberschriften der Tabelle setzen
+        model->setHeaderData(model->record().indexOf("DAUER"), Qt::Horizontal, "DAUER (MIN)");
 
-//    // Spaltenüberschriften der Tabelle setzen
-//    model->setHeaderData(model->record().indexOf("PLZ"), Qt::Horizontal, "Postleitzahl");
-//    model->setHeaderData(model->record().indexOf("ORT"), Qt::Horizontal, "Ort");
+    // Das Datenmodell zuweisen
+    ui->tableView->setModel(model);
 
-//    // Das Datenmodell zuweisen
-//    ui->tableView->setModel(model);
+    // Die TableView liest initial nur die ersten 256 Datensätze. Das ist in der TableView festgelegt.
+    // Wenn aber von Anfang an alle Datensätze benötigt werden, kann man mit folgender Anweisung die
+    // vollständige Azahl der Datensätze im Datenmodell ermitteln.
+    while(model->canFetchMore())
+        model->fetchMore();
 
-//    // Die TableView liest initial nur die ersten 256 Datensätze.
-//    // Das ist in der TableView festgelegt.
+    // Das Signal selectionChanged mit dem Slot tableView_slectionChanged verbinden. Über diesen Slot wird die aktuelle
+    // Zeilennummer von allen Zeilen in der TableView in der Statusbar angezeigt. Der eigene Slot tableView_selectionChanged()
+    // benötigt die beiden Argumente QItemSelection, welche vom Signal gesendet werden nicht. Deshalb werden sie
+    // auch nicht an den Slot weitergegeben.
+    connect(ui->tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
+                        this, SLOT(tableView_selectionChanged()));
 
-//    // Wenn aber von Anfang an alle Datensätze benötigt werden, kann man
-//    // mit folgender Anweisung die vollständige Azahl der Datensätze
-//    // im Datenmodell ermitteln.
-//    while(model->canFetchMore())
-//        model->fetchMore();
-
-
-//    // Das Signal selectionChanged mit dem Slot tableView_slectionChanged verbinden.
-//    // Über diesen Slot wird die aktuelle Zeilennummer von allen Zeilen in der TableView
-//    // in der Statusbar angezeigt.
-//    // Der eigene Slot tableView_selectionChanged() benötigt die beiden Argumente QItemSelection,
-//    // welche vom Signal gesendet werden nicht. Deshalb werden sie auch nicht an den Slot
-//    // weitergegeben.
-//    connect(ui->tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
-//                        this, SLOT(tableView_selectionChanged()));
-
-//    return model;
+    return model;
 }
 
 void MainWindow::closeEvent(QCloseEvent *)
@@ -164,21 +179,45 @@ void MainWindow::closeEvent(QCloseEvent *)
 void MainWindow::newMeal()
 {   
     // Erstellen eines nicht-modalen Dialogs
-    // Nicht-modale Dialoge können nur auf dem Heap erstellt weden.
     if (newMealDlg == nullptr)
     {
         // Dialog erstellen
         newMealDlg = new NeuDialog(this);
-        // Dialog anzeigen
+        // dann Dialog anzeigen
         newMealDlg->show();
     }
     else if (newMealDlg != nullptr)
     {
-        // Dialog wieder anzeigen
-        newMealDlg->show();
-        // Dialog aktivieren
-        newMealDlg->activateWindow();
+        int msgValue = QMessageBox::question(this, this->windowTitle(),
+                                             "Es wird bereits ein neues Gericht angelegt. Soll dieses verworfenwerden um ein leeres neues Gericht zu bearbeiten?",
+                                             QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel);
+        if (msgValue == QMessageBox::Cancel)
+        {
+            //return;
+            // Dialog wieder anzeigen
+            newMealDlg->show();
+            // dann Dialog aktivieren
+            newMealDlg->activateWindow();
+        }
+        else if (msgValue == QMessageBox::Yes)
+        {
+            // Dialog erst löschen
+            delete newMealDlg;
+            // dann Dialog erstellen
+            newMealDlg = new NeuDialog(this);
+            // dann Dialog anzeigen
+            newMealDlg->show();
+        }
     }
+}
+
+void MainWindow::showGerichtDetailsDialog(const qint64 key)
+{
+    GerichtDetailsDialog gerichtDetailsDialog(key, this);
+    // Die Signale für UPDATE und INSERT mit dem Slot verbinden
+    connect(&gerichtDetailsDialog, SIGNAL(refreshData(const qint64)), this, SLOT(updateTableView(const qint64)));
+
+    gerichtDetailsDialog.exec();
 }
 
 void MainWindow::shoppingList()
@@ -201,28 +240,166 @@ void MainWindow::shoppingList()
     }
 }
 
+void MainWindow::deleteEntry(const QModelIndex index)
+{
+    // Das Datenmodell der TableView statt in ein QSqlTableModel in ein QSqlQueryModel konvertieren
+    QSqlQueryModel* model = static_cast<QSqlQueryModel*>(ui->tableView->model());
+
+    // Ermitteln des Primärschlüssel in der Spalte PRIMARYKEY über den als
+    // Parameter übergebenen QModelIndex.
+    qint64 key = model->record(index.row()).value("PRIMARYKEY").toLongLong();
+
+    // Lesen des Gerichtes aus dem Datenmodell zur Anzeige im Message Dialog
+    QString gericht = model->record(index.row()).value("Gericht").toString();
+
+    int msgValue = QMessageBox::question(this, this->windowTitle(),
+                                         "Das Gericht: '" + gericht + "' löschen?",
+                                         QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel);
+    if (msgValue == QMessageBox::Cancel)
+        return;
+
+    // Löschen des Gerichtes aus der Tabelle 'Gerichte' über den 'Primärschlüssel'
+    if (!GerichteDAO::deleteGericht(key))
+        return;
+
+    // Lesen des Gerichtnamens aus dem Datenmodell zur späteren Suche in Tabelle 'Zutaten'
+    QString zutaten = model->record(index.row()).value("Gericht").toString();
+
+    // Löschen des Gerichtes aus der Tabelle 'Zutaten' über Namen 'Gericht'
+    if (!ZutatenDAO::deleteZutaten(zutaten))
+        return;
+
+    statusLabel->setText("Einträge werden aktualisiert...");
+    QApplication::processEvents();
+
+    // Postleitzahlen neu in das Datenmodell einlesen
+    setTableViewModel();
+
+    // Sicherstellen, das der Row-Index nicht negativ wird.
+    int row = (index.row() - 1 < 0) ? 0 : index.row() - 1;
+
+    if (ui->tableView->model()->rowCount() > 0)
+        ui->tableView->selectRow(row);
+}
+
+bool MainWindow::eventFilter(QObject *absender, QEvent *event)
+{
+    if (absender == ui->textPersonen)
+    {
+        // Uns interessiert die Eingabe über die Tastatur prüfen ob das Ereignis ein Tastendruck ist
+        if (event->type() == QEvent::KeyPress)
+        {
+            // Welche Taste wurde betätigt
+            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+
+            if (!isControlKey(keyEvent->key()))
+            {
+                // Merken des Textfeldes. Das Objekt 'absender' in 'QLineEdit' konvertieren
+                QLineEdit* tf = static_cast<QLineEdit*>(absender);
+
+                // Eventuell selektierten Text im Textfeld vorher löschen
+                if (tf->hasSelectedText())
+                {
+                    // Selektierter Text wird ueberschrieben
+                    tf->insert("");
+                }
+
+                // Plausibilitätsprüfung: 'isDigit' => Nur Ziffern 0 bis 9
+                if (!QChar(keyEvent->key()).isDigit())
+                {
+                    // Fehlersignal aussenden
+                    QApplication::beep();
+                    return true;
+                }
+                // Wert soll nicht groesser als 9999 sein.
+                if (convertTextFieldToValue(tf, QChar(keyEvent->key())) > 9999)
+                {
+                    // Fehlersignal aussenden
+                    QApplication::beep();
+                    return true;
+                }
+            }
+        }
+    }
+
+
+    if (absender == ui->tableView)
+        {
+            if (event->type() == QEvent::KeyPress)
+            {
+                QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+
+                if (keyEvent->key() == Qt::Key_Home)
+                {
+                    ui->tableView->scrollToTop();
+                    ui->tableView->selectRow(0);
+                }
+                else if (keyEvent->key()== Qt::Key_End)
+                {
+                    ui->tableView->scrollToBottom();
+                    ui->tableView->selectRow(ui->tableView->model()->rowCount() - 1);
+                }
+                else if (keyEvent->key() == Qt::Key_Return)
+                {
+                    // Den Index der selektierten Zeile ermitteln
+                    on_tableView_doubleClicked(ui->tableView->currentIndex());
+                }
+                else if (keyEvent->key() == Qt::Key_Delete)
+                    deleteEntry(ui->tableView->currentIndex());
+            }
+        }
+
+    // Event am alle anderen Widgets weiterleiten, falls das Ereignes (event) nicht abgefangt wird
+    return QObject::eventFilter(absender, event);
+}
+
+bool MainWindow::isControlKey(int key)
+{
+    return (key >= 16'777'216);
+}
+
+int MainWindow::convertTextFieldToValue(QLineEdit *tf, QChar keyCharacter)
+{
+    int charPos = tf->cursorPosition();
+
+    QString s = tf->text().mid(0, charPos) + keyCharacter + tf->text().mid(charPos);
+
+    return s.toInt();
+}
+
 
 
 
 // Slots:
+// Beenden
 void MainWindow::on_actionB_eenden_triggered()
 {
     close();
 }
+void MainWindow::on_btnBeenden_clicked()
+{
+    close();
+}
 
-
-// textSuchen
+// Suchen
 void MainWindow::on_textSuchen_returnPressed()
 {
     this->focusNextChild();
 }
 void MainWindow::on_textSuchen_editingFinished()
 {
-
+    mealSearched = ui->textSuchen->text();
+    setTableViewModel();
+    mealSearched = QString();
+}
+void MainWindow::on_btnSuchen_clicked()
+{
+    mealSearched = ui->textSuchen->text();
+    setTableViewModel();
+    mealSearched = QString();
 }
 
-
-
+// Neu
 void MainWindow::on_btnNeu_clicked()
 {
     newMeal();
@@ -232,6 +409,7 @@ void MainWindow::on_action_Neu_2_triggered()
     newMeal();
 }
 
+// Einkaufsliste
 void MainWindow::on_btnEinkaufsliste_clicked()
 {
     shoppingList();
@@ -239,5 +417,62 @@ void MainWindow::on_btnEinkaufsliste_clicked()
 void MainWindow::on_actionZur_Einkaufs_liste_triggered()
 {
     shoppingList();
+}
+
+void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    // Das Datenmodell der TableView in eine QSqlTableModel konvertieren
+    QSqlQueryModel* model = static_cast<QSqlQueryModel*>(ui->tableView->model());
+
+    showGerichtDetailsDialog(model->record(index.row()).value("PRIMARYKEY").toLongLong());
+}
+
+void MainWindow::on_btnGerichtLoeschen_clicked()
+{
+    deleteEntry(ui->tableView->currentIndex());
+    setTableViewModel();
+}
+
+// Nach Kategorien anzeigen
+void MainWindow::on_btnAlleGerichte_clicked()
+{
+    category = "";
+    setTableViewModel();
+}
+void MainWindow::on_btnFruehstueck_clicked()
+{
+    category = "Frühstück";
+    setTableViewModel();
+}
+void MainWindow::on_btnMittag_clicked()
+{
+    category = "Mittag";
+    setTableViewModel();
+}
+void MainWindow::on_btnAbendbrot_clicked()
+{
+    category = "Abendbrot";
+    setTableViewModel();
+}
+void MainWindow::on_btnSnack_clicked()
+{
+    category = "Snack";
+    setTableViewModel();
+}
+void MainWindow::on_btnNachtisch_clicked()
+{
+    category = "Nachtisch";
+    setTableViewModel();
+}
+
+// Personen
+void MainWindow::on_textPersonen_returnPressed()
+{
+    ui->textPersonen->text();
+    ui->btnZurEinkaufslisteHinzufuegen->setEnabled(true);
+}
+void MainWindow::on_textPersonen_textChanged(const QString &)
+{
+    this->focusNextChild();
 }
 

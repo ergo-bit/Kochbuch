@@ -7,8 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>885</width>
-    <height>678</height>
+    <height>656</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>885</width>
+    <height>656</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>885</width>
+    <height>656</height>
+   </size>
   </property>
   <property name="font">
    <font>
@@ -30,7 +42,7 @@ background-color: rgb(180, 180, 175)
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>105</y>
+      <y>100</y>
       <width>371</width>
       <height>30</height>
      </rect>
@@ -51,7 +63,7 @@ text-align: center;
     <property name="geometry">
      <rect>
       <x>280</x>
-      <y>30</y>
+      <y>25</y>
       <width>326</width>
       <height>61</height>
      </rect>
@@ -70,7 +82,7 @@ text-align: center;
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>155</y>
+      <y>145</y>
       <width>141</width>
       <height>36</height>
      </rect>
@@ -99,7 +111,7 @@ background-color: rgb(190, 150, 210);
     <property name="geometry">
      <rect>
       <x>155</x>
-      <y>155</y>
+      <y>145</y>
       <width>141</width>
       <height>36</height>
      </rect>
@@ -128,7 +140,7 @@ background-color: rgb(80, 190, 160);
     <property name="geometry">
      <rect>
       <x>300</x>
-      <y>155</y>
+      <y>145</y>
       <width>141</width>
       <height>36</height>
      </rect>
@@ -157,7 +169,7 @@ background-color: rgb(100, 170, 210);
     <property name="geometry">
      <rect>
       <x>445</x>
-      <y>155</y>
+      <y>145</y>
       <width>141</width>
       <height>36</height>
      </rect>
@@ -186,7 +198,7 @@ background-color: rgb(230, 130, 150);
     <property name="geometry">
      <rect>
       <x>590</x>
-      <y>155</y>
+      <y>145</y>
       <width>141</width>
       <height>36</height>
      </rect>
@@ -215,7 +227,7 @@ background-color: rgb(255, 240, 160);
     <property name="geometry">
      <rect>
       <x>735</x>
-      <y>155</y>
+      <y>145</y>
       <width>141</width>
       <height>36</height>
      </rect>
@@ -243,23 +255,23 @@ background-color: rgb(240, 200, 160);
    <widget class="QPushButton" name="btnNeu">
     <property name="geometry">
      <rect>
-      <x>85</x>
-      <y>85</y>
-      <width>50</width>
-      <height>50</height>
+      <x>10</x>
+      <y>80</y>
+      <width>181</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Blackadder ITC</family>
-      <pointsize>30</pointsize>
+      <pointsize>20</pointsize>
       <stylestrategy>PreferDefault</stylestrategy>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton
 {
-border: 0px solid grey;
+border: 1px solid grey;
 border-radius: 5px;
 text-align: center;
 background-color: lightgray;
@@ -267,16 +279,16 @@ background-color: lightgray;
 </string>
     </property>
     <property name="text">
-     <string>+</string>
+     <string>Neues Gericht</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnEinkaufsliste">
     <property name="geometry">
      <rect>
-      <x>705</x>
-      <y>85</y>
-      <width>136</width>
-      <height>50</height>
+      <x>695</x>
+      <y>80</y>
+      <width>181</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
@@ -289,7 +301,7 @@ background-color: lightgray;
     <property name="styleSheet">
      <string notr="true">QPushButton
 {
-border: 0px solid grey;
+border: 1px solid grey;
 border-radius: 5px;
 text-align: center;
 background-color: lightgray;
@@ -300,37 +312,39 @@ background-color: lightgray;
      <string>Einkaufsliste</string>
     </property>
    </widget>
-   <widget class="QWidget" name="widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>524</y>
-      <width>71</width>
-      <height>56</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QTableView" name="tableView">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>200</y>
-      <width>886</width>
-      <height>401</height>
+      <x>80</x>
+      <y>190</y>
+      <width>730</width>
+      <height>371</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Shell Dlg 2</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
+    <property name="alternatingRowColors">
+     <bool>true</bool>
     </property>
     <property name="selectionMode">
      <enum>QAbstractItemView::SingleSelection</enum>
     </property>
     <property name="selectionBehavior">
-     <enum>QAbstractItemView::SelectItems</enum>
+     <enum>QAbstractItemView::SelectRows</enum>
     </property>
    </widget>
    <widget class="QPushButton" name="btnSuchen">
     <property name="geometry">
      <rect>
       <x>590</x>
-      <y>105</y>
+      <y>100</y>
       <width>76</width>
       <height>30</height>
      </rect>
@@ -360,9 +374,9 @@ background-color: lightgray;
    <widget class="QPushButton" name="btnZurEinkaufslisteHinzufuegen">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>604</y>
-      <width>301</width>
+      <x>225</x>
+      <y>570</y>
+      <width>286</width>
       <height>31</height>
      </rect>
     </property>
@@ -389,8 +403,8 @@ background-color: rgb(80, 190, 160);
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>605</y>
+      <x>80</x>
+      <y>570</y>
       <width>36</width>
       <height>30</height>
      </rect>
@@ -405,11 +419,11 @@ background-color: rgb(80, 190, 160);
      <string>... für</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="textPersonen">
     <property name="geometry">
      <rect>
-      <x>195</x>
-      <y>610</y>
+      <x>125</x>
+      <y>575</y>
       <width>26</width>
       <height>20</height>
      </rect>
@@ -418,8 +432,8 @@ background-color: rgb(80, 190, 160);
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>605</y>
+      <x>160</x>
+      <y>570</y>
       <width>51</width>
       <height>30</height>
      </rect>
@@ -432,6 +446,66 @@ background-color: rgb(80, 190, 160);
     </property>
     <property name="text">
      <string>Personen</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnGerichtLoeschen">
+    <property name="geometry">
+     <rect>
+      <x>525</x>
+      <y>570</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Blackadder ITC</family>
+      <pointsize>15</pointsize>
+      <stylestrategy>PreferDefault</stylestrategy>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+border: 1px solid grey;
+border-radius: 5px;
+text-align: center;
+background-color: rgb(230, 130, 150);
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Gericht löschen</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnBeenden">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>570</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Blackadder ITC</family>
+      <pointsize>15</pointsize>
+      <stylestrategy>PreferDefault</stylestrategy>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+border: 1px solid grey;
+border-radius: 5px;
+text-align: center;
+background-color: lightgray;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Beenden</string>
     </property>
    </widget>
   </widget>
@@ -555,6 +629,10 @@ background-color: rgb(80, 190, 160);
   <tabstop>btnSnack</tabstop>
   <tabstop>btnNachtisch</tabstop>
   <tabstop>tableView</tabstop>
+  <tabstop>textPersonen</tabstop>
+  <tabstop>btnZurEinkaufslisteHinzufuegen</tabstop>
+  <tabstop>btnGerichtLoeschen</tabstop>
+  <tabstop>btnBeenden</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -11,17 +11,20 @@ CONFIG += c++11
 
 SOURCES += \
     EinkaufslisteDialog.cpp \
+    GerichtDetailsDialog.cpp \
     NeuDialog.cpp \
     main.cpp \
     MainWindow.cpp
 
 HEADERS += \
     EinkaufslisteDialog.h \
+    GerichtDetailsDialog.h \
     MainWindow.h \
     NeuDialog.h
 
 FORMS += \
     EinkaufslisteDialog.ui \
+    GerichtDetailsDialog.ui \
     MainWindow.ui \
     NeuDialog.ui
 
